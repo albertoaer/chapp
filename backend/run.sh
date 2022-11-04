@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-go build backend.go
+wire .
+go build -o backend.exe
 ./backend.exe

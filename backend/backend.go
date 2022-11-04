@@ -1,22 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/gorilla/websocket"
+	"github.com/gin-gonic/gin"
 )
 
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(*http.Request) bool { return true },
-}
-
-func chat(w http.ResponseWriter, r *http.Request) {
-}
-
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/chat", chat)
-	fmt.Println("Running")
-	http.ListenAndServe(":3000", mux)
+	router := gin.Default()
+
+	router.GET("/status", func(ctx *gin.Context) {
+		ctx.String(200, "Running")
+	})
+
+	router.GET("/chat/:id", ProvideConnectChat())
+
+	router.Run(":3000")
 }
