@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  width: min(15em, 40vw);
+}
+
+:host > ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+:host > ul > * {
+  border-bottom: 1px black solid;
+}

@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --rich-black: #00171F;
+  --green-pigment: #3FA34D;
+  --fire-opal: #E86252;
+  --lavender-web: #D9DBF1;
+  --dark-jungle: #01110A;
+  color: var(--dark-jungle);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: var(--lavender-web);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
