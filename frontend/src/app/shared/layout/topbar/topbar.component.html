@@ -1,8 +1,23 @@
 <ul>
-  <li class="static">
+  <li class="static logo">
     <ng-content></ng-content>
   </li>
+  <span class="delimiter"></span>
   <li class="material-symbols-outlined">
     chat_bubble
+  </li>
+  <span class="delimiter solid" *ngIf="currentGroup"></span>
+  <li class="static" *ngIf="currentGroup && enableGroupName">
+    {{ currentGroup }}
+  </li>
+  <li class="material-symbols-outlined" *ngIf="currentGroup">
+    delete
+  </li>
+  <li class="material-symbols-outlined">
+    add
+  </li>
+  <span class="delimiter solid"></span>
+  <li class="material-symbols-outlined">
+    person
   </li>
 </ul>

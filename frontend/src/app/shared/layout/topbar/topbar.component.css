@@ -7,6 +7,7 @@
 }
 
 :host > ul {
+  justify-content: flex-start;
   display: flex;
   margin: 0em 1em;
   padding: 0;
@@ -22,6 +23,8 @@
   transition: all 0.4s;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 :host > ul > li:not(.static):hover {
@@ -38,4 +41,19 @@
   cursor: pointer;
   transform: translateY(0.2em);
   transition: all 0.2s;
+}
+
+:host > ul > span.delimiter {
+  margin: auto 0.5em;
+}
+
+:host > ul > span.delimiter.solid {
+  border-left: 1px var(--dark-jungle) solid;
+  height: 50%;
+}
+
+@media (max-width: 500px) {
+  :host > ul {
+    justify-content: center;
+  }
 }
