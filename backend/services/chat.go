@@ -12,21 +12,21 @@ type ChatMonitor struct {
 	model       models.Chat
 }
 
-type ChatsService struct {
+type ChatService struct {
 	chats    map[string]*ChatMonitor
 	chatsMx  sync.RWMutex
 	owners   map[int]string
 	ownersMx sync.RWMutex
 }
 
-func NewChatService() *ChatsService {
-	return &ChatsService{
+func NewChatService() *ChatService {
+	return &ChatService{
 		chats:  make(map[string]*ChatMonitor),
 		owners: make(map[int]string),
 	}
 }
 
-func (srv *ChatsService) GetChats() map[string]models.Chat {
+func (srv *ChatService) GetChats() map[string]models.Chat {
 	srv.chatsMx.RLock()
 	defer srv.chatsMx.RUnlock()
 	chats := make(map[string]models.Chat)
@@ -36,7 +36,7 @@ func (srv *ChatsService) GetChats() map[string]models.Chat {
 	return chats
 }
 
-func (srv *ChatsService) CreateChat(name string, owner *models.UserInfo) error {
+func (srv *ChatService) CreateChat(name string, owner *models.UserInfo) error {
 	srv.chatsMx.Lock()
 	defer srv.chatsMx.Unlock()
 	srv.ownersMx.Lock()

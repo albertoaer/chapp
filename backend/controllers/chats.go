@@ -9,12 +9,8 @@ import (
 )
 
 type ChatsController struct {
-	chatService *services.ChatsService
-	userService *services.UserService
-}
-
-func NewChatsController(chatService *services.ChatsService, userService *services.UserService) ChatsController {
-	return ChatsController{chatService, userService}
+	ChatService *services.ChatService
+	UserService *services.UserService
 }
 
 func (ctr *ChatsController) Connect(ctx *gin.Context) {
@@ -27,7 +23,7 @@ type ListChatsResponse struct {
 }
 
 func (ctr *ChatsController) List(ctx *gin.Context) {
-	ctx.JSON(200, ListChatsResponse{ctr.chatService.GetChats()})
+	ctx.JSON(200, ListChatsResponse{ctr.ChatService.GetChats()})
 }
 
 type CreateChatBody struct {
@@ -41,12 +37,12 @@ func (ctr *ChatsController) New(ctx *gin.Context) {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
-	user, err := ctr.userService.GetUser(body.OwnerId)
+	user, err := ctr.UserService.GetUser(body.OwnerId)
 	if err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
-	if err = ctr.chatService.CreateChat(body.ChatName, user); err != nil {
+	if err = ctr.ChatService.CreateChat(body.ChatName, user); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 	}
 }

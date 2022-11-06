@@ -1,11 +1,9 @@
 package main
 
 import (
-	"chapp-backend/server"
+	"chapp-backend/app"
 )
 
 func main() {
-	router := server.Router()
-
-	router.Run(":3000")
+	app.InitializeApp().Launch(":3000")
 }

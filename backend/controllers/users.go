@@ -7,13 +7,9 @@ import (
 )
 
 type UsersController struct {
-	userService *services.UserService
-}
-
-func NewUsersController(userService *services.UserService) UsersController {
-	return UsersController{userService}
+	UserService *services.UserService
 }
 
 func (ctr *UsersController) LogIn(ctx *gin.Context) {
-	ctr.userService.LogIn(ctx.Param("name"))
+	ctr.UserService.LogIn(ctx.Param("name"))
 }
