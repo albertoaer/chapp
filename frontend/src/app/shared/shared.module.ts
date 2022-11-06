@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { ChatItemComponent } from './layout/chat-item/chat-item.component';
 import { ChatListComponent } from './layout/chat-list/chat-list.component';
+import { DialogbaseComponent } from './dialogs/dialogbase/dialogbase.component';
 
 @NgModule({
   declarations: [
     TopbarComponent,
     ChatItemComponent,
-    ChatListComponent
+    ChatListComponent,
+    DialogbaseComponent
   ],
   imports: [
     CommonModule
@@ -16,7 +18,8 @@ import { ChatListComponent } from './layout/chat-list/chat-list.component';
   exports: [
     TopbarComponent,
     ChatItemComponent,
-    ChatListComponent
+    ChatListComponent,
+    DialogbaseComponent
   ]
 })
 export class SharedModule { }

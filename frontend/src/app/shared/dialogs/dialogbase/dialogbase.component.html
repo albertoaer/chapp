@@ -1,0 +1,8 @@
+<div id="window">
+  <div id="content">
+    <ng-content></ng-content>
+  </div>
+  <button id="close" class="material-symbols-outlined" *ngIf="closable" (click)="close()">
+    close
+  </button>
+</div>
