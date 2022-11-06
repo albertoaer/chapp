@@ -7,13 +7,15 @@ import (
 )
 
 var upgrader = websocket.Upgrader{
-	CheckOrigin: func(*http.Request) bool { return true },
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+	CheckOrigin:     func(*http.Request) bool { return true },
 }
 
-func Create(w http.ResponseWriter, r *http.Request) (*websocket.Conn, error) {
+func From(w http.ResponseWriter, r *http.Request) (*Conn, error) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		return nil, err
 	}
-	return conn, nil
+	return &Conn{conn}, nil
 }

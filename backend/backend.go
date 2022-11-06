@@ -1,17 +1,11 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"chapp-backend/server"
 )
 
 func main() {
-	router := gin.Default()
-
-	router.GET("/status", func(ctx *gin.Context) {
-		ctx.String(200, "Running")
-	})
-
-	router.GET("/chat/:id", ProvideConnectChat())
+	router := server.Router()
 
 	router.Run(":3000")
 }
