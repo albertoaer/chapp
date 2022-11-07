@@ -1,11 +1,11 @@
 import { Component, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-dialogbase',
-  templateUrl: './dialogbase.component.html',
-  styleUrls: ['./dialogbase.component.css']
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.css']
 })
-export class DialogbaseComponent {
+export class DialogComponent {
 
   @HostBinding('style.display')
   display: string = 'grid';
