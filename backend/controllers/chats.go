@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"chapp-backend/models"
 	"chapp-backend/services"
 	"net/http"
 
@@ -18,12 +17,8 @@ func (ctr *ChatsController) Connect(ctx *gin.Context) {
 	//websockets.ForRoom(ctx.Writer, ctx.Request, id)
 }
 
-type ListChatsResponse struct {
-	Chats map[string]models.Chat `json:"chats"`
-}
-
 func (ctr *ChatsController) List(ctx *gin.Context) {
-	ctx.JSON(200, ListChatsResponse{ctr.ChatService.GetChats()})
+	ctx.JSON(200, gin.H{"chats": ctr.ChatService.GetChats()})
 }
 
 type CreateChatBody struct {
