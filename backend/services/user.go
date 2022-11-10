@@ -31,7 +31,7 @@ func (srv *UserService) GetUser(id int) (*models.UserInfo, error) {
 	return nil, errors.New("User does not exists")
 }
 
-func (srv *UserService) LogIn(name string) (*models.UserInfo, error) {
+func (srv *UserService) SignIn(name string) *models.UserInfo {
 	srv.usersMx.Lock()
 	defer srv.usersMx.Unlock()
 	srv.usersCont++ //First id will be 1, not 0
@@ -43,5 +43,5 @@ func (srv *UserService) LogIn(name string) (*models.UserInfo, error) {
 		LogIn:       time.Now(),
 	}
 	srv.activeUsers[srv.usersCont] = inf
-	return inf, nil
+	return inf
 }
