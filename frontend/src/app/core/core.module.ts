@@ -4,6 +4,7 @@ import { ChatService } from './services/chat.service';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
   declarations: [],
@@ -14,7 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   providers: [
     ChatService,
-    UserService
+    UserService,
+    MessagingService
   ]
 })
 export class CoreModule { }
