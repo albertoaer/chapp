@@ -48,7 +48,7 @@ func Router(
 	router.GET("/status", controllers.Status)
 	userg := router.Group("/users")
 	{
-		userg.POST("/signin/:name", auth.SignIn)
+		userg.POST("/signin", auth.SignIn)
 	}
 
 	// Restricted Zone

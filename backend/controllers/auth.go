@@ -28,8 +28,14 @@ func (ctr *AuthController) RequireLogin(ctx *gin.Context) {
 	}
 }
 
+type SignInBody struct {
+	UserName string `json:"name" binding:"required"`
+}
+
 func (ctr *AuthController) SignIn(ctx *gin.Context) {
-	info := ctr.UserService.SignIn(ctx.Param("name"))
+	var data SignInBody
+	ctx.BindJSON(&data)
+	info := ctr.UserService.SignIn(data.UserName)
 	token, err := ctr.JWT.Create(gin.H{
 		UserNameKey: info.Name,
 		UserIdKey:   info.Id,
