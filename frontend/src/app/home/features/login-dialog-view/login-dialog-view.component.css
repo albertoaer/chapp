@@ -1,0 +1,109 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+#main {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#header {
+  font-size: 2em;
+  margin: 0;
+  color: var(--green-pigment);
+}
+
+#profile {
+  align-self: center;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  background: linear-gradient(90deg, var(--green-pigment), var(--dark-jungle));
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#profile > img {
+  border-radius: 100%;
+  scale: 0.9;
+  transition: all 0.1s;
+}
+
+#profile > img:hover {
+  translate: 0 -0.2em;
+  transition: all 0.1s;
+}
+
+input[type="text"] {
+  align-self: center;
+  font-size: 1.3em;
+  background: transparent;
+  outline: 0;
+  border: 2px solid var(--green-pigment);
+  padding: 5px;
+  color: var(--lavender-web);
+  border-radius: 0.2em;
+  transition: all 0.2s;
+  width: 10em;
+}
+
+input[type="text"]:focus {
+  color: var(--green-pigment);
+  transition: all 0.2s;
+}
+
+input[type="text"]::placeholder {
+  color: var(--green-pigment);
+}
+
+input[type="text"]:hover::placeholder {
+  color: var(--lavender-web);
+}
+
+input[type="text"]:focus::placeholder {
+  color: transparent;
+}
+
+input.btn {
+  align-self: flex-end;
+  width: 5em;
+  font-size: 1.3em;
+  padding: 5px 15px;
+  color: var(--dark-jungle);
+  background-color: var(--green-pigment);
+  border: none;
+  border-radius: 0.2em;
+  transition: all 0.2s;
+}
+
+input.btn:hover {
+  scale: 1.05;
+  transition: all 0.2s;
+}
+
+input.btn:active {
+  scale: 1.1;
+  transition: all 0.1s;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  height: 2em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
