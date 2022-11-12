@@ -15,13 +15,13 @@ export class DialogComponent {
 
   constructor(private element: ElementRef) { }
 
-  @HostListener("click", ['$event'])
-  click(event: Event) {
-    if (event.target == this.element.nativeElement) this.close();
+  @Input('openned')
+  set openned(state: boolean) {
+    this.display = state ? 'grid' : 'none';
   }
 
-  close() {
-    if (this.closable)
-      this.display = 'none';
+  @HostListener("click", ['$event'])
+  click(event: Event) {
+    if (event.target == this.element.nativeElement && this.closable) this.openned = false;
   }
 }
