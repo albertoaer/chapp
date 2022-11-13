@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@core/services/user.service';
 import { User } from '@shared/domain';
-import { DialogComponent } from '@shared/layout/dialog/dialog.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,11 +11,19 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnDestroy {  
   activeId: User.Identification | null = null;
-  subscription: Subscription = this.user.idChange().subscribe(id => this.activeId = id)
+  idSubscription: Subscription = this.user.idChange().subscribe(id => {
+    this.activeId = id;
+    if (this.route.snapshot.queryParams['origin'])
+      this.router.navigateByUrl(this.route.snapshot.queryParams['origin']);
+  });
 
-  constructor(private user: UserService) {}
+  constructor(
+    private user: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.idSubscription.unsubscribe();
   }
 }
