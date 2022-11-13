@@ -5,6 +5,7 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessagingService } from './services/messaging.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { MessagingService } from './services/messaging.service';
   providers: [
     ChatService,
     UserService,
-    MessagingService
+    MessagingService,
+    AuthGuard,
   ]
 })
 export class CoreModule { }
