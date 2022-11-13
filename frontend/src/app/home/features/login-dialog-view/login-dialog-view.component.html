@@ -1,11 +1,11 @@
 <h1 id="header">Log in</h1>
 <form id="main">
-<ng-container *ngIf="loginData as data">
+<ng-container *ngIf="loginData | async as data">
   <div id="profile">
     <img alt="profile_photo" width="120em" height="120em" [src]="data.picture"
       [style.opacity]="data.picture ? 100 : 0">
   </div>
-  <p class="error">{{ loginError }}</p>
+  <p class="error">{{ loginError | async }}</p>
   <input type="text" name="username" id="" placeholder="username" [(ngModel)]="data.name">
   <input type="submit" class="btn" value="Validate" (click)="user.login({
     name: data.name,
