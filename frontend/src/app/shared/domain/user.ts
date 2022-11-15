@@ -8,3 +8,7 @@ export interface Identification {
   id: number;
   token: string;
 }
+
+export type UserEvent =
+  { type: 'log in', identification: Identification } |
+  { type: 'log out', identification: null };

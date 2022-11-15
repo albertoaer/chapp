@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnDestroy {  
-  activeId: User.Identification | null = null;
-  idSubscription: Subscription = this.user.idChange().subscribe(id => {
-    this.activeId = id;
+  identification: User.Identification | null = null;
+  idSubscription: Subscription = this.user.userEvents().subscribe(ev => {
+    this.identification = ev.identification;
     if (this.route.snapshot.queryParams['origin'])
       this.router.navigateByUrl(this.route.snapshot.queryParams['origin']);
   });

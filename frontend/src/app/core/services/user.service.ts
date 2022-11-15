@@ -8,62 +8,70 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserService {
 
-  private idStream: ReplaySubject<User.Identification> = new ReplaySubject();
+  private userEvents$: ReplaySubject<User.UserEvent> = new ReplaySubject();
 
-  private loginDataStream: BehaviorSubject<User.LoginData> =
+  private loginData$: BehaviorSubject<User.LoginData> =
     new BehaviorSubject({
       name: localStorage.getItem('login.name') ?? '',
       picture: localStorage.getItem('login.picture') ?? ''
     });
 
-  private loginErrorStream: Subject<string> = new Subject();
+  private loginError$: Subject<string> = new Subject();
 
   constructor(
     @Inject(API_URL) private apiURL: string,
     private http: HttpClient
   ) {
-    this.idStream.subscribe(data => {
-      localStorage.setItem('auth.token', data.token);
-      localStorage.setItem('auth.name', data.name);
-      localStorage.setItem('auth.id', data.id.toString());
+    this.userEvents$.subscribe(data => {
+      const stored = data.type == 'log in' ?
+      data.identification :
+        { token: '', name: '', id: 0 };
+      localStorage.setItem('auth.token', stored.token);
+      localStorage.setItem('auth.name', stored.name);
+      localStorage.setItem('auth.id', stored.id.toString());
     })
     const token = localStorage.getItem('auth.token');
     const name = localStorage.getItem('auth.name');
     const id = Number.parseInt(localStorage.getItem('auth.id') ?? '');
-    if (token && name && id) this.idStream.next({ token, name, id })
+    if (token && name && id) this.userEvents$.next({
+      type: 'log in', identification: { token, name, id }
+    })
   }
 
-  idChange(): Observable<User.Identification> {
-    return this.idStream.asObservable();
+  userEvents(): Observable<User.UserEvent> {
+    return this.userEvents$.asObservable();
   }
 
   loginData(): Observable<User.LoginData> {
-    return this.loginDataStream.asObservable();
+    return this.loginData$.asObservable();
   }
 
   loginError(): Observable<string> {
-    return this.loginErrorStream.asObservable();
+    return this.loginError$.asObservable();
   }
 
-  sendLogin(name: string) {
+  private sendLogin(name: string) {
     this.http.post<HttpResponse<any>>(`${this.apiURL}/users/signin`, {name}, {observe: 'response'})
     .pipe(catchError(err => of(err))).subscribe((data: any) => {
-      console.log(data)
       if (data?.status == 201)
-        this.idStream.next(data.body);
+        this.userEvents$.next({ type: 'log in', identification: data.body });
       else
-        this.loginErrorStream.next(data?.error?.errors || data?.name);
+        this.loginError$.next(data?.error?.errors || data?.name);
     });
+  }
+
+  logout() {
+    this.userEvents$.next({ type: 'log out', identification: null });
   }
 
   login(data: User.LoginData) {
     if (data.name) {
-      this.loginDataStream.next(data);
+      this.loginData$.next(data);
       localStorage.setItem('login.name', data.name);
       localStorage.setItem('login.picture', data.picture);
       this.sendLogin(data.name);
     } else {
-      this.loginErrorStream.next('An username must be provided');
+      this.loginError$.next('An username must be provided');
     }
   }
 }
