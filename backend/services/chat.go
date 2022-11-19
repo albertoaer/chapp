@@ -36,6 +36,16 @@ func (srv *ChatService) GetChats() map[string]models.Chat {
 	return chats
 }
 
+func (srv *ChatService) ListChats() []models.Chat {
+	srv.chatsMx.RLock()
+	defer srv.chatsMx.RUnlock()
+	chats := make([]models.Chat, 0)
+	for _, chat := range srv.chats {
+		chats = append(chats, chat.model)
+	}
+	return chats
+}
+
 func (srv *ChatService) CreateChat(name string, owner *models.UserInfo) error {
 	srv.chatsMx.Lock()
 	defer srv.chatsMx.Unlock()
