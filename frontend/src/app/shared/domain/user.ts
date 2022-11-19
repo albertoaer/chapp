@@ -9,6 +9,14 @@ export interface Identification {
   token: string;
 }
 
+export interface Info {
+  name: string;
+  picture: string;
+  id: number;
+  description: string;
+  login: string
+}
+
 export type UserEvent =
   { type: 'log in', identification: Identification } |
   { type: 'log out', identification: null };
