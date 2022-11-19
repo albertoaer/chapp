@@ -18,16 +18,15 @@ func (ctr *ChatController) Connect(ctx *gin.Context) {
 }
 
 func (ctr *ChatController) List(ctx *gin.Context) {
-	ctx.JSON(200, gin.H{"chats": ctr.ChatService.GetChats()})
-}
-
-type CreateChatBody struct {
-	ChatName string `json:"name" binding:"required"`
-	OwnerId  int    `json:"id" binding:"required"`
+	// TODO: Filter chat properties
+	ctx.JSON(200, gin.H{"chats": ctr.ChatService.ListChats()})
 }
 
 func (ctr *ChatController) New(ctx *gin.Context) {
-	var body CreateChatBody
+	var body struct {
+		ChatName string `json:"name" binding:"required"`
+		OwnerId  int    `json:"id" binding:"required"`
+	}
 	if err := ctx.BindJSON(&body); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
@@ -35,9 +34,7 @@ func (ctr *ChatController) New(ctx *gin.Context) {
 	user, err := ctr.UserService.GetUser(body.OwnerId)
 	if err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
-		return
-	}
-	if err = ctr.ChatService.CreateChat(body.ChatName, user); err != nil {
+	} else if err = ctr.ChatService.CreateChat(body.ChatName, user); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 	}
 }
