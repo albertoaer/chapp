@@ -7,8 +7,8 @@ import (
 )
 
 func Router(
-	chats controllers.ChatsController,
-	users controllers.UsersController,
+	chats controllers.ChatController,
+	users controllers.UserController,
 	auth controllers.AuthController,
 ) *gin.Engine {
 

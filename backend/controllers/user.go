@@ -4,6 +4,6 @@ import (
 	"chapp-backend/services"
 )
 
-type UsersController struct {
+type UserController struct {
 	UserService *services.UserService
 }

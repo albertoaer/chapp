@@ -7,17 +7,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ChatsController struct {
+type ChatController struct {
 	ChatService *services.ChatService
 	UserService *services.UserService
 }
 
-func (ctr *ChatsController) Connect(ctx *gin.Context) {
+func (ctr *ChatController) Connect(ctx *gin.Context) {
 	//id := ctx.Param("id")
 	//websockets.ForRoom(ctx.Writer, ctx.Request, id)
 }
 
-func (ctr *ChatsController) List(ctx *gin.Context) {
+func (ctr *ChatController) List(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{"chats": ctr.ChatService.GetChats()})
 }
 
@@ -26,7 +26,7 @@ type CreateChatBody struct {
 	OwnerId  int    `json:"id" binding:"required"`
 }
 
-func (ctr *ChatsController) New(ctx *gin.Context) {
+func (ctr *ChatController) New(ctx *gin.Context) {
 	var body CreateChatBody
 	if err := ctx.BindJSON(&body); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
