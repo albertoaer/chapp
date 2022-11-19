@@ -6,6 +6,7 @@ import { ChatListComponent } from './layout/chat-list/chat-list.component';
 import { DialogComponent } from './layout/dialog/dialog.component';
 import { RouterModule } from '@angular/router';
 import { UserIdPipe } from './pipes/user-id.pipe';
+import { NoSelectDirective } from './directives/no-select.directive';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { UserIdPipe } from './pipes/user-id.pipe';
     ChatItemComponent,
     ChatListComponent,
     DialogComponent,
-    UserIdPipe
+    UserIdPipe,
+    NoSelectDirective
   ],
   imports: [
     CommonModule,
