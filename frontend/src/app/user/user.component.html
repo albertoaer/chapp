@@ -1,0 +1,17 @@
+<div id="main" *ngIf="identification | async as id">
+  <img src="" width="200" height="200">
+  <div class="namegroup">
+    <h1>Hi {{ id.name }}</h1>
+    <p class="identification">({{ id | userId }})</p>
+  </div>
+  <div>
+    <button class="material-symbols-outlined" (click)="user.logout()">
+      logout
+    </button>
+    <button class="material-symbols-outlined">
+      edit
+    </button>
+  </div>
+  <!-- TODO: Resolve this with a pipe-->
+  <p>Active chat: <u>ChatName</u> (owner)</p>
+</div>

@@ -4,22 +4,27 @@ import { TopbarComponent } from './layout/topbar/topbar.component';
 import { ChatItemComponent } from './layout/chat-item/chat-item.component';
 import { ChatListComponent } from './layout/chat-list/chat-list.component';
 import { DialogComponent } from './layout/dialog/dialog.component';
+import { RouterModule } from '@angular/router';
+import { UserIdPipe } from './pipes/user-id.pipe';
 
 @NgModule({
   declarations: [
     TopbarComponent,
     ChatItemComponent,
     ChatListComponent,
-    DialogComponent
+    DialogComponent,
+    UserIdPipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     TopbarComponent,
     ChatItemComponent,
     ChatListComponent,
-    DialogComponent
+    DialogComponent,
+    UserIdPipe
   ]
 })
 export class SharedModule { }

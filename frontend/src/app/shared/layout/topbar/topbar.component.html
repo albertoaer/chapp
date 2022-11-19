@@ -3,7 +3,7 @@
     <ng-content></ng-content>
   </li>
   <span class="delimiter"></span>
-  <li class="material-symbols-outlined">
+  <li class="material-symbols-outlined" routerLink="/home">
     chat_bubble
   </li>
   <span class="delimiter solid" *ngIf="currentGroup"></span>
@@ -17,7 +17,7 @@
     add
   </li>
   <span class="delimiter solid"></span>
-  <li class="material-symbols-outlined">
+  <li class="material-symbols-outlined" routerLink="/user">
     person
   </li>
 </ul>
