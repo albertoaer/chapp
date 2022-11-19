@@ -19,6 +19,10 @@ export class AuthGuard implements CanActivate, OnDestroy {
     });
   }
 
+  currentId(): User.Identification | null {
+    return this.identification;
+  }
+
   canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this.identification != null) return true;
     this.forceUserAuth(state.url);
